@@ -1,0 +1,8 @@
+apiVersion: deeptalk.deepshore.de/v1alpha1
+kind: DeepPloyment
+metadata:
+  name: validate-status-00
+status:
+  customInfo:
+    message: "This is a test!"
+

@@ -1,0 +1,10 @@
+apiVersion: deeptalk.deepshore.de/v1alpha1
+kind: DeepPloyment
+metadata:
+  name: validate-status-01
+spec:
+  deployment:
+    replicas: 1
+    message: "This is another test!"
+  service:
+    port: 8080

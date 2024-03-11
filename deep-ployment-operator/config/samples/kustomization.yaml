@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- deeptalk_v1alpha1_deepployment.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

@@ -1,0 +1,69 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: deepployments.deeptalk.deepshore.de
+spec:
+  group: deeptalk.deepshore.de
+  names:
+    kind: DeepPloyment
+    listKind: DeepPloymentList
+    plural: deepployments
+    singular: deepployment
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: DeepPloyment is the Schema for the deepployments API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: Spec defines the desired state of DeepPloyment
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+            properties:
+              deployment: 
+                type: object
+                properties:
+                  replicas:
+                    type: integer 
+                    default: 1
+                    minimum: 1
+                    maximum: 3
+                  message:
+                    type: string 
+                    default: "Hello"
+              service:
+                type: object 
+                properties: 
+                  port: 
+                    type: integer 
+                    default: 8080
+          status:
+            description: Status defines the observed state of DeepPloyment
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+            properties:
+              customInfo:
+                type: object
+                properties:
+                  message:
+                    type: string 
+                    default: "" 
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

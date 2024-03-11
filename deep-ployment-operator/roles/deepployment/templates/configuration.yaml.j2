@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+    index.html: |
+        <html>
+            <h1>
+                {{ deployment.message }}
+            </h1>
+        </html>
+kind: ConfigMap
+metadata:
+    name: "{{ ansible_operator_meta.name }}-deep-ployment"
+    namespace: "{{ ansible_operator_meta.namespace }}"

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: "{{ ansible_operator_meta.name }}-deep-ployment"
+    namespace: "{{ ansible_operator_meta.namespace }}"
+spec:
+  replicas: {{ deployment.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ ansible_operator_meta.name }}-deep-ployment"
+  template:
+    metadata:
+      labels:
+        app: "{{ ansible_operator_meta.name }}-deep-ployment"
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: config 
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: config 
+        configMap:
+            name: "{{ ansible_operator_meta.name }}-deep-ployment"

@@ -1,0 +1,16 @@
+apiVersion: deeptalk.deepshore.de/v1alpha1
+kind: DeepPloyment
+metadata:
+  labels:
+    app.kubernetes.io/name: deepployment
+    app.kubernetes.io/instance: deepployment-sample
+    app.kubernetes.io/part-of: deep-ployment-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: deep-ployment-operator
+  name: deepployment-sample
+spec:
+  deployment:
+    replicas: 1
+    message: "Hello from the DeepTalk-Team!"
+  service:
+    port: 8080

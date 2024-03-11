@@ -1,0 +1,27 @@
+# permissions for end users to view deepployments.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: deepployment-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: deep-ployment-operator
+    app.kubernetes.io/part-of: deep-ployment-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: deepployment-viewer-role
+rules:
+- apiGroups:
+  - deeptalk.deepshore.de
+  resources:
+  - deepployments
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - deeptalk.deepshore.de
+  resources:
+  - deepployments/status
+  verbs:
+  - get

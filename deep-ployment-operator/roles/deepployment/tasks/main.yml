@@ -1,0 +1,29 @@
+---
+# tasks file for DeepPloyment
+- debug:
+    msg: "Hello from DeepPloyment Operator!"
+
+- name: Manage configuration
+  kubernetes.core.k8s:
+    state: present
+    template: "templates/configuration.yaml.j2"
+
+- name: Manage deployment 
+  kubernetes.core.k8s:
+    state: present
+    template: "templates/deployment.yaml.j2"
+
+- name: Manage service
+  kubernetes.core.k8s:
+    state: present
+    template: "templates/service.yaml.j2"
+
+- name: Update status
+  operator_sdk.util.k8s_status:
+    api_version: deeptalk.deepshore.de/v1alpha1
+    kind: DeepPloyment
+    name: "{{ ansible_operator_meta.name }}"
+    namespace: "{{ ansible_operator_meta.namespace }}"
+    status:
+      customInfo: 
+        message: "{{ deployment.message }}"
