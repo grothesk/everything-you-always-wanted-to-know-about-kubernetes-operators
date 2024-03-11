@@ -60,3 +60,4 @@ jobs:
         run: cd $PROJECT_DIR && make bundle bundle-build bundle-push
         env:
           BUNDLE_IMG: ${{ env.REGISTRY_URL }}/${{ env.ORG }}/${{ env.REPO_BUNDLE_IMAGE }}:${{ github.ref_name }}
+          PROJECT_DIR: ${{ env.REPO_IMAGE }}
