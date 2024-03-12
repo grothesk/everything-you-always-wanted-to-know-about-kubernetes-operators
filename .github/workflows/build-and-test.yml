@@ -1,4 +1,4 @@
-name: Build and test the operator
+name: Build and test the operator on pushes to main
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Update catalog
+name: Update catalog on pushes to main
 
 on:
   push:
