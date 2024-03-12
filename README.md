@@ -35,9 +35,10 @@ Operator SDK unterstützt die Entwicklung mit
 
 Hauptvorteil von Operator SDK ist die Integration in Operator Lifecycle Management (OLM).
 
-## Speedrun: Entwicklung eines Ansible-based Operators mit Operator SDK 
+## Speedrun: Entwicklung und Bereitstellung eines Ansible-based Operators mit Operator SDK und OLM
 
 ## Requirements
+
 * Operator SDK (v1.32.0)
 
 ## Schritte 
@@ -59,7 +60,30 @@ make init-operator-project
 
 7. Deploye den Operator.
 
-8. Teste den Operator.
+8. Teste den Operator:
+```bash
+make test-operator
+```
+
+9. Automatisiere Build und Test.
+
+10. Automatisiere die Bereitstellung des Operator-Images.
+
+11. Erzeuge ein Bundle und automatisiere die Bereitstellung.
+
+12. Erzeuge ein Catalog-Image und automatisiere die Bereitstellung.
+
+13. Installiere OLM:
+```bash
+make install-olm
+```
+
+14. Installiere den Operator via OLM:
+```bash
+make install-operator-via-olm
+```
+
+15. Teste den Operator (s.o.).
 
 
 ## Sources
@@ -68,6 +92,7 @@ make init-operator-project
 * Operator Frameworks: [https://kubernetes.io/docs/concepts/extend-kubernetes/operator/#writing-operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/#writing-operator)
 * Operator SDK: [https://sdk.operatorframework.io/](https://sdk.operatorframework.io/)
 * Kubebuilder: [https://book.kubebuilder.io/](https://book.kubebuilder.io/)
+* KUbernetes Test Tool: [https://kuttl.dev/](https://kuttl.dev/)
+* GitHub Actions: [https://docs.github.com/actions](https://docs.github.com/actions)
 * Operator Lifecyle Management: [https://olm.operatorframework.io/](https://olm.operatorframework.io/)
-
-
+* k9s: [https://k9scli.io/](https://k9scli.io/)
