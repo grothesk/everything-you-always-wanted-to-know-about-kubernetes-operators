@@ -1,0 +1,49 @@
+name: Update catalog
+
+on:
+  push:
+    branches:
+      - 'main'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  REGISTRY_URL: quay.io
+  ORG: maltegroth
+  REPO_IMAGE: deep-ployment-catalog
+  CATALOG_DIR: deep-ployment-catalog
+
+jobs:
+  update-catalog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download and install opm
+        run: |
+          set -ue
+          curl -sLf --retry 3 \
+            -o /tmp/linux-amd64-opm \
+            https://github.com/operator-framework/operator-registry/releases/download/v1.31.0/linux-amd64-opm
+          sudo install -m 0755 /tmp/linux-amd64-opm /usr/local/bin/opm
+
+      - name: Generate catalog
+        run: cd $CATALOG_DIR && mkdir $REPO_IMAGE && make generate-catalog
+
+      - name: Validate catalog
+        run: cd $CATALOG_DIR && make validate-catalog
+
+      - name: Login to registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_ROBOT_TOKEN }}
+
+      - name: Build and push operator image
+        run: cd $CATALOG_DIR && make docker-build docker-push
+        env:
+          DOCKER_IMAGE: ${{ env.REGISTRY_URL }}/${{ env.ORG }}/${{ env.REPO_IMAGE }}:latest

@@ -19,3 +19,6 @@ rm-operator-project:
 
 create-cluster:
 	minikube start -p ${CLUSTER_NAME} --cpus=${CLUSTER_CPUS} --memory=${CLUSTER_MEMORY} --disk-size=${CLUSTER_DISK_SIZE} --driver=${CLUSTER_DRIVER}
+
+delete-cluster:
+	minikube stop -p ${CLUSTER_NAME}

@@ -1,0 +1,18 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: deep-ployment-operator
+  namespace: deep-ployment-operator
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: deep-ployment-operator
+  namespace: deep-ployment-operator
+spec:
+  channel: stable-v0
+  name: deep-ployment-operator
+  source: deep-ployment-catalog
+  sourceNamespace: deep-ployment-operator
+  installPlanApproval: Automatic
+  startingCSV: deep-ployment-operator.v0.0.1
